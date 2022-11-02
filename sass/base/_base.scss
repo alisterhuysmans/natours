@@ -1,0 +1,48 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    /*font-size: 10px;*/
+    font-size: 62.5%; // to define what 1 rem is.
+    /* établir la mesure étalon en % pour ensuite modifier toutes les valeurs en pixels en rem. 
+  Passer en rem permet de préparer le terrain pour configurer les media queries et réduire
+  les proportions du contenu d'une page pour s'adapter à un écran mobile.
+  Attention à bien déclarer le font-size root en pourcentage par rapport à la font-size standard
+  des navigateurs qui est 16px.16px équivaut à 100% et 10px sera donc 62.5%. */
+
+    @include respond(tab-land) {
+        // always put the larger screen before the others (et inversément si l'on fait du mobile-first)
+        font-size: 56.25%; // 1rem = 9px, 9/16 = 56.25%
+    }
+
+    @include respond(tab-port) {
+        font-size: 50%; // 1rem = 8px, 8/16 = 50%
+    }
+
+    // @include respond(phone) { // pas nécessaire car tab-port est aussi à 50%
+    //     font-size: 50%;
+    // }
+
+    @include respond(big-desktop) {
+        font-size: 75%; // 1rem = 12px, 12/16 = 75%
+    }
+}
+
+body {
+    box-sizing: border-box;
+    padding: 3rem; /* 30px devient 3rem car 30px/10px = 3rem */
+
+    @include respond(tab-port) {
+        padding: 0; // 1rem = 8px, 8/16 = 50%
+    }
+}
+
+::selection {
+    background-color: rgba($color-primary, 0.9);
+    color: $color-white;
+}
